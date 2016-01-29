@@ -27,6 +27,7 @@
     color: #fff;
     padding: 30px 0 10px;
     text-align: center;
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
 }
 
 .page .message {
@@ -39,7 +40,6 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    z-index: 10;
 }
 
 .card {
@@ -72,6 +72,8 @@
     transform: rotateY(180deg);
 }
 
-button {
-    
+.image-dung, .image-sai {
+    opacity: 0.7;
+    z-index: -1;
+    position: absolute;
 }
