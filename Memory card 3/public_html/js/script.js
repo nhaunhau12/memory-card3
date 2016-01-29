@@ -60,22 +60,26 @@ $(document).ready(function () {
     var solanbam = 0;
     var click1;
     var click2;
-    var clicked = 20;
-    var thoigian = 30;
-    var point = $('.card.active').length / 2;
-    var msg = 'Điểm của bạn là : ' + point + ' Vui lòng bấm <a href="#" onclick="window.location.reload();">vào đây</a> để chơi lại.';
-                
-    
-    var run = setInterval(function(){
+    var thoigian = 60;
+    var point;
+
+
+    var run = setInterval(function () {
         thoigian--;
+        point = $('.card.active').length / 2;
+        var msg = 'Điểm của bạn là : ' + point + ' Vui lòng bấm <a href="#" onclick="window.location.reload();">vào đây</a> để chơi lại.';
         var timer = thoigian + ' giây';
         $('span#mycounter').html(timer);
-        if (thoigian==0){
+        if (thoigian == 0) {
             clearInterval(run);
             $('.title > span').html(msg);
             alert('hết giờ');
         }
-    },1000);
+        if ($('.card.active').length / 2 == 6) {
+            clearInterval(run);
+            $('.title > span').html(msg);
+        }
+    }, 1000);
 
 
     $('audio')[0].play();
@@ -84,18 +88,17 @@ $(document).ready(function () {
 
     $('.card').click(function () {
 
-        if (clicked == 1) {
+        if (thoigian == 0) {
             $(document).ready(function () {
                 $('audio')[2].play();
                 $('audio')[0].pause();
             });
 
-        } else if (clicked >= 0) {
+        } else if (thoigian >= 0) {
 
             if (!$(this).hasClass('show')) {
                 $(this).addClass('show');
-                clicked--;
-                $('.message').html('' + clicked);
+                $('.message').html('' + thoigian);
                 if (solanbam <= 2) {
                     solanbam++;
                     if (solanbam == 1) {
@@ -118,6 +121,7 @@ $(document).ready(function () {
                             $('.show').css('opacity', '0');
                             $('.background').each(function () {
                                 $('.image-dung').css('display', 'block');
+                                    $('.background').css('display', 'none');
                             });
                             solanbam = 0;
                             $('audio')[3].play();
@@ -125,14 +129,16 @@ $(document).ready(function () {
 
                                 $('.background').each(function () {
                                     $('.image-dung').css('display', 'none');
+                                    $('.background').css('display', 'block');
                                 });
 
-                            }, 2000);
+                            }, 1500);
 
                         } else if (click1 != click2) {
                             $('audio')[4].play();
                             $('.background').each(function () {
                                 $('.image-sai').css('display', 'block');
+                                    $('.background').css('display', 'none');
                             });
 
                             setTimeout(function () {
@@ -149,9 +155,10 @@ $(document).ready(function () {
                                 if (solanbam == 0) {
                                     $('.background').each(function () {
                                         $('.image-sai').css('display', 'none');
+                                    $('.background').css('display', 'block');
                                     });
                                 }
-                            }, 2000);
+                            }, 1500);
 
                         }
 
